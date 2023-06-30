@@ -203,10 +203,10 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/dashboards/crypto"
+                  to="/management/transactions"
                   startIcon={<BrightnessLowTwoToneIcon />}
                 >
-                  Chart Analyze
+                  Data List
                 </Button>
               </ListItem>
             </List>
@@ -218,10 +218,10 @@ function SidebarMenu() {
                   disableRipple
                   component={RouterLink}
                   onClick={closeSidebar}
-                  to="/management/transactions"
+                  to="/dashboards/crypto"
                   startIcon={<TableChartTwoToneIcon />}
                 >
-                  Data List
+                  Chart Analyze
                 </Button>
               </ListItem>
             </List>

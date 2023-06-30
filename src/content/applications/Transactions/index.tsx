@@ -10,11 +10,11 @@ function ApplicationsTransactions() {
   return (
     <>
       <Helmet>
-        <title>Transactions - Applications</title>
+        <title>Data List</title>
       </Helmet>
-      <PageTitleWrapper>
+      {/* <PageTitleWrapper>
         <PageHeader />
-      </PageTitleWrapper>
+      </PageTitleWrapper> */}
       <Container maxWidth="lg">
         <Grid
           container

@@ -52,7 +52,7 @@ export default function SignIn() {
   const onSignIn = (values: any) => {
     console.log('onFinishLogin Received values of form: ', values);
     axios({
-      url: 'api/login',
+      url: '/api/login',
       params: values
     })
       .then((response) => {

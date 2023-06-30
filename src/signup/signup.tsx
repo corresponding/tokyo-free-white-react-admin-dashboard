@@ -51,7 +51,7 @@ export default function SignUp() {
   const onSignUp = (values: any) => {
     console.log('onFinishLogin Received values of form: ', values);
     axios({
-      url: 'api/login',
+      url: '/api/register',
       params: values
     })
       .then((response) => {
