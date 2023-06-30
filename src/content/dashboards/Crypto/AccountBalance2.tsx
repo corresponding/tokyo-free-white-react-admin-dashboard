@@ -18,7 +18,7 @@ import TrendingUp from '@mui/icons-material/TrendingUp';
 import Text from 'src/components/Text';
 import Chart from 'react-apexcharts';
 import type { ApexOptions } from 'apexcharts';
-import Show from 'src/show/show';
+import Show2 from 'src/show2/show2';
 
 const AvatarSuccess = styled(Avatar)(
   ({ theme }) => `
@@ -56,7 +56,7 @@ const ListItemAvatarWrapper = styled(ListItemAvatar)(
 `
 );
 
-function AccountBalance() {
+function AccountBalance2() {
   const theme = useTheme();
 
   const chartOptions: ApexOptions = {
@@ -191,11 +191,11 @@ function AccountBalance() {
           >
             <Divider absolute orientation="vertical" />
           </Box>
-          <Show></Show>
+          <Show2></Show2>
         </Grid>
       </Grid>
     </Card>
   );
 }
 
-export default AccountBalance;
+export default AccountBalance2;

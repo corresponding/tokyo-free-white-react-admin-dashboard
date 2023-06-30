@@ -3,7 +3,7 @@ import * as eCharts from 'echarts';
 import axios from 'axios';
 import cookie from 'react-cookies';
 
-export default class Show extends PureComponent {
+export default class Show4 extends PureComponent {
   eChartsRef: any = React.createRef();
 
   reqInstance = axios.create({
@@ -13,7 +13,7 @@ export default class Show extends PureComponent {
   });
 
   componentDidMount() {
-    this.visitPie();
+    this.timeAnalyze();
   }
 
   render() {
@@ -21,7 +21,7 @@ export default class Show extends PureComponent {
       <div
         ref={this.eChartsRef}
         style={{
-          width: 800,
+          width: 1400,
           height: 600,
           marginTop: 50
         }}
@@ -29,9 +29,9 @@ export default class Show extends PureComponent {
     );
   }
 
-  visitPie = () => {
+  timeAnalyze = () => {
     this.reqInstance
-      .post('/api/visitPie')
+      .post('/api/timeAnalyze')
       .then((response) => {
         // handle success
         // console.log(response);
@@ -39,35 +39,26 @@ export default class Show extends PureComponent {
         console.log(data);
 
         let option = {
-          // title: {
-          //   text: 'Accessed node distribution',
-          //   subtext: '',
-          //   left: 'center'
-          // },
-          tooltip: {
-            trigger: 'item'
+          title: {
+            text: 'Number of Accessed within an hour',
+            subtext: '',
+            left: 'center'
           },
-          legend: {
-            orient: 'vertical',
-            left: 'left'
+          xAxis: {
+            type: 'category',
+            data: data.xlist
+          },
+          yAxis: {
+            type: 'value',
+            name: 'Count'
           },
           series: [
             {
-              name: 'Access From',
-              type: 'pie',
-              radius: '50%',
-              data: data.seriesNameValue,
-              emphasis: {
-                itemStyle: {
-                  shadowBlur: 10,
-                  shadowOffsetX: 0,
-                  shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-              }
+              data: data.series1D,
+              type: 'line'
             }
           ]
         };
-
         const myChart = eCharts.init(this.eChartsRef.current);
         myChart.clear();
         myChart.setOption(option, true);
