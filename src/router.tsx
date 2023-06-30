@@ -8,6 +8,7 @@ import BaseLayout from 'src/layouts/BaseLayout';
 import SuspenseLoader from 'src/components/SuspenseLoader';
 import SignIn from './signin/signin';
 import SignUp from './signup/signup';
+import UploadPage from './upload/uploadpage';
 
 const Loader = (Component) => (props) =>
   (
@@ -94,6 +95,10 @@ const routes: RouteObject[] = [
       {
         path: 'register',
         element: <SignUp />
+      },
+      {
+        path: 'upload',
+        element: <UploadPage />
       },
       {
         path: 'overview',
