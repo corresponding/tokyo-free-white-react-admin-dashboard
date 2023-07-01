@@ -46,23 +46,18 @@ export default class Show5 extends PureComponent {
           yAxis: {
             type: 'value'
           },
+          tooltip: {
+            trigger: 'axis', //坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用
+            axisPointer: {
+              // 坐标轴指示器，坐标轴触发有效
+              type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+            }
+          },
+
           series: [
             {
               data: data.series1D,
-              type: 'bar',
-              itemStyle: {
-                normal: {
-                  label: {
-                    show: true, //开启显示数值
-                    position: 'top', //数值在上方显示
-                    textStyle: {
-                      //数值样式
-                      color: '#D3D3D3', //字体颜色
-                      fontSize: 14 //字体大小
-                    }
-                  }
-                }
-              }
+              type: 'bar'
             }
           ],
           dataZoom: [
@@ -73,7 +68,7 @@ export default class Show5 extends PureComponent {
               xAxisIndex: [0],
               left: '10%', //滑动条位置
               start: 1, //初始化时，滑动条宽度开始标度
-              end: 50 //初始化时，滑动条宽度结束标度
+              end: 10 //初始化时，滑动条宽度结束标度
             }, //X轴内置滑动
             {
               type: 'inside', //内置滑动，随鼠标滚轮展示
