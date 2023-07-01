@@ -75,6 +75,10 @@ export default function SignIn() {
       });
   };
 
+  let token = Cookies.get('token');
+  if (token) {
+    return <Navigate to="/dashboards" />;
+  }
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
