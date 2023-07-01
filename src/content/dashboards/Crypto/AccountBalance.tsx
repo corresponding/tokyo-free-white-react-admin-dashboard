@@ -139,11 +139,11 @@ function AccountBalance() {
               }}
               variant="h4"
             >
-              Ip Number
+              标题1
             </Typography>
             <Box>
               <Typography variant="h1" gutterBottom>
-                5900
+                副标题1
               </Typography>
               <Box
                 display="flex"
@@ -154,7 +154,7 @@ function AccountBalance() {
               >
                 <Box>
                   <Typography variant="subtitle2" noWrap>
-                    5
+                    内容1
                   </Typography>
                 </Box>
               </Box>
