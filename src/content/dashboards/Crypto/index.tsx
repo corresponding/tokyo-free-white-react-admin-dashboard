@@ -11,6 +11,7 @@ import Wallets from './Wallets';
 import AccountSecurity from './AccountSecurity';
 import WatchList from './WatchList';
 import AccountBalance4 from './AccountBalance4';
+import AccountBalance5 from './AccountBalance5';
 
 function DashboardCrypto() {
   return (
@@ -40,6 +41,9 @@ function DashboardCrypto() {
           </Grid>
           <Grid item xs={12}>
             <AccountBalance3 />
+          </Grid>
+          <Grid item xs={12}>
+            <AccountBalance5 />
           </Grid>
           {/* <Grid item lg={4} xs={12}>
             <AccountSecurity />

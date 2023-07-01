@@ -3,7 +3,7 @@ import * as eCharts from 'echarts';
 import axios from 'axios';
 import cookie from 'react-cookies';
 
-export default class Show4 extends PureComponent {
+export default class Show5 extends PureComponent {
   eChartsRef: any = React.createRef();
 
   reqInstance = axios.create({
@@ -31,7 +31,7 @@ export default class Show4 extends PureComponent {
 
   timeAnalyze = () => {
     this.reqInstance
-      .post('/api/timeAnalyze')
+      .post('/api/lengthColumn')
       .then((response) => {
         // handle success
         // console.log(response);
@@ -39,23 +39,47 @@ export default class Show4 extends PureComponent {
         console.log(data);
 
         let option = {
-          // title: {
-          //   text: 'Number of Accessed within an hour',
-          //   subtext: '',
-          //   left: 'center'
-          // },
           xAxis: {
             type: 'category',
             data: data.xlist
           },
           yAxis: {
             type: 'value'
-            // name: 'Count'
           },
           series: [
             {
               data: data.series1D,
-              type: 'line'
+              type: 'bar',
+              itemStyle: {
+                normal: {
+                  label: {
+                    show: true, //开启显示数值
+                    position: 'top', //数值在上方显示
+                    textStyle: {
+                      //数值样式
+                      color: '#D3D3D3', //字体颜色
+                      fontSize: 14 //字体大小
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          dataZoom: [
+            //X轴滑动条
+            {
+              type: 'slider', //滑动条
+              show: true, //开启
+              xAxisIndex: [0],
+              left: '10%', //滑动条位置
+              start: 1, //初始化时，滑动条宽度开始标度
+              end: 50 //初始化时，滑动条宽度结束标度
+            }, //X轴内置滑动
+            {
+              type: 'inside', //内置滑动，随鼠标滚轮展示
+              xAxisIndex: [0],
+              start: 1, //初始化时，滑动条宽度开始标度
+              end: 100 //初始化时，滑动条宽度结束标度
             }
           ]
         };
