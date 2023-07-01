@@ -18,7 +18,11 @@ import TrendingUp from '@mui/icons-material/TrendingUp';
 import Text from 'src/components/Text';
 import Chart from 'react-apexcharts';
 import type { ApexOptions } from 'apexcharts';
-import Show from 'src/show/show';
+import Show2 from 'src/show2/show2';
+import Show3 from 'src/show3/show3';
+import Show4 from 'src/show4/show4';
+import Show5 from 'src/show5/show5';
+import Show6 from 'src/show6/show6';
 
 const AvatarSuccess = styled(Avatar)(
   ({ theme }) => `
@@ -56,7 +60,7 @@ const ListItemAvatarWrapper = styled(ListItemAvatar)(
 `
 );
 
-function AccountBalance() {
+function AccountBalance6() {
   const theme = useTheme();
 
   const chartOptions: ApexOptions = {
@@ -131,7 +135,7 @@ function AccountBalance() {
   return (
     <Card>
       <Grid spacing={0} container>
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={3}>
           <Box p={4}>
             <Typography
               sx={{
@@ -139,11 +143,11 @@ function AccountBalance() {
               }}
               variant="h4"
             >
-              标题1
+              标题6
             </Typography>
             <Box>
               <Typography variant="h1" gutterBottom>
-                副标题1
+                副标题6
               </Typography>
               <Box
                 display="flex"
@@ -154,7 +158,7 @@ function AccountBalance() {
               >
                 <Box>
                   <Typography variant="subtitle2" noWrap>
-                    内容1
+                    内容6
                   </Typography>
                 </Box>
               </Box>
@@ -181,7 +185,7 @@ function AccountBalance() {
           alignItems="center"
           item
           xs={12}
-          md={7}
+          md={9}
         >
           <Box
             component="span"
@@ -191,11 +195,11 @@ function AccountBalance() {
           >
             <Divider absolute orientation="vertical" />
           </Box>
-          <Show></Show>
+          <Show6></Show6>
         </Grid>
       </Grid>
     </Card>
   );
 }
 
-export default AccountBalance;
+export default AccountBalance6;
