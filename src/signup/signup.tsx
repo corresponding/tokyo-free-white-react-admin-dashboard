@@ -16,6 +16,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import cookie from 'react-cookies';
 import Cookies from 'js-cookie';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
 
 function Copyright(props: any) {
   return (
@@ -37,6 +39,8 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
+  const [open, setOpen] = React.useState(false);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -59,11 +63,15 @@ export default function SignUp() {
         // console.log(response);
         let { data } = response.data;
         console.log(data);
-        let token = Cookies.get('token');
-        if (token) {
-          cookie.save('token', token, { path: '/' });
+        if (data.isLogin) {
+          let token = Cookies.get('token');
+          if (token) {
+            cookie.save('token', token, { path: '/' });
+          }
+          navigate('/dashboards');
+        } else {
+          setOpen(true);
         }
-        navigate('/dashboards');
       })
       .catch(function (error) {
         // handle error
@@ -72,6 +80,10 @@ export default function SignUp() {
       .then(function () {
         // always executed
       });
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -168,6 +180,15 @@ export default function SignUp() {
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />
+        <Dialog
+          onClose={handleClose}
+          aria-labelledby="simple-dialog-title"
+          open={open}
+        >
+          <DialogTitle id="simple-dialog-title">
+            Account already exists!
+          </DialogTitle>
+        </Dialog>
       </Container>
     </ThemeProvider>
   );

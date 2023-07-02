@@ -16,6 +16,8 @@ import axios from 'axios';
 import cookie from 'react-cookies';
 import Cookies from 'js-cookie';
 import { useNavigate, Navigate } from 'react-router-dom';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
 
 function Copyright(props: any) {
   return (
@@ -37,6 +39,8 @@ function Copyright(props: any) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  const [open, setOpen] = React.useState(false);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -60,11 +64,15 @@ export default function SignIn() {
         // console.log(response);
         let { data } = response.data;
         console.log(data);
-        let token = Cookies.get('token');
-        if (token) {
-          cookie.save('token', token, { path: '/' });
+        if (data.isLogin) {
+          let token = Cookies.get('token');
+          if (token) {
+            cookie.save('token', token, { path: '/' });
+          }
+          navigate('/dashboards');
+        } else {
+          setOpen(true);
         }
-        navigate('/dashboards');
       })
       .catch(function (error) {
         // handle error
@@ -79,6 +87,11 @@ export default function SignIn() {
   if (token) {
     return <Navigate to="/dashboards" />;
   }
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -108,7 +121,7 @@ export default function SignIn() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Username"
               name="email"
               autoComplete="email"
               autoFocus
@@ -150,6 +163,15 @@ export default function SignIn() {
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
+        <Dialog
+          onClose={handleClose}
+          aria-labelledby="simple-dialog-title"
+          open={open}
+        >
+          <DialogTitle id="simple-dialog-title">
+            The username or password is incorrect!
+          </DialogTitle>
+        </Dialog>
       </Container>
     </ThemeProvider>
   );
