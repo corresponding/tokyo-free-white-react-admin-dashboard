@@ -26,9 +26,14 @@ function RecentOrders() {
   }, []);
 
   const getdata = () => {
-    axios({
-      url: '/api/getdata'
-    })
+    axios
+      .create({
+        headers: {
+          token: cookie.load('token'),
+          'Cache-Control': 'no-cache'
+        }
+      })
+      .get('/api/getdata')
       .then((response) => {
         // handle success
         // console.log(response);
