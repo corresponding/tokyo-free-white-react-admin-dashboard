@@ -8,7 +8,8 @@ export default class Show extends PureComponent {
 
   reqInstance = axios.create({
     headers: {
-      token: cookie.load('token')
+      token: cookie.load('token'),
+      'Cache-Control': 'no-cache'
     }
   });
 
