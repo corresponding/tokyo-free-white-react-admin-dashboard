@@ -53,7 +53,7 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   const onSignUp = (values: any) => {
-    console.log('onFinishLogin Received values of form: ', values);
+    console.log('signup onFinishLogin Received values of form: ', values);
     axios({
       url: '/api/register',
       params: values
