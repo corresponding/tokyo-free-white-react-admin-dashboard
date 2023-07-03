@@ -198,6 +198,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
               <TableCell>Name</TableCell>
               <TableCell>address</TableCell>
               <TableCell>email</TableCell>
+              <TableCell>phone</TableCell>
               <TableCell align="right">have delete</TableCell>
               <TableCell align="right">have udpate</TableCell>
               {/* <TableCell align="right">Actions</TableCell> */}
@@ -258,6 +259,20 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       noWrap
                     >
                       {cryptoOrder.email}
+                    </Typography>
+                    {/* <Typography variant="body2" color="text.secondary" noWrap>
+                      {cryptoOrder.sourceDesc}
+                    </Typography> */}
+                  </TableCell>
+                  <TableCell>
+                    <Typography
+                      variant="body1"
+                      fontWeight="bold"
+                      color="text.primary"
+                      gutterBottom
+                      noWrap
+                    >
+                      {cryptoOrder.phone}
                     </Typography>
                     {/* <Typography variant="body2" color="text.secondary" noWrap>
                       {cryptoOrder.sourceDesc}

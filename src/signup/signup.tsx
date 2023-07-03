@@ -138,13 +138,44 @@ export default function SignUp() {
                   autoComplete="family-name"
                 />
               </Grid> */}
+
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="username"
+                  label="UserName"
+                  name="username"
+                  autoComplete="email"
+                />
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
                   id="email"
-                  label="UserName"
+                  label="Email"
                   name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="phone"
+                  label="Phone"
+                  name="phone"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="address"
+                  label="Address"
+                  name="address"
                   autoComplete="email"
                 />
               </Grid>
