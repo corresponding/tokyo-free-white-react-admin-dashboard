@@ -40,6 +40,7 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
   const [open, setOpen] = React.useState(false);
+  const [msg, setMsg] = React.useState('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -77,6 +78,7 @@ export default function SignIn() {
             navigate('/dashboards');
           }
         } else {
+          setMsg(data.msg);
           setOpen(true);
         }
       })
@@ -182,9 +184,7 @@ export default function SignIn() {
           aria-labelledby="simple-dialog-title"
           open={open}
         >
-          <DialogTitle id="simple-dialog-title">
-            The username or password is incorrect!
-          </DialogTitle>
+          <DialogTitle id="simple-dialog-title">{msg}</DialogTitle>
         </Dialog>
       </Container>
     </ThemeProvider>
