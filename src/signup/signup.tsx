@@ -67,8 +67,14 @@ export default function SignUp() {
           let token = Cookies.get('token');
           if (token) {
             cookie.save('token', token, { path: '/' });
+            cookie.save('isAdmin', data.isAdmin, { path: '/' });
+            cookie.save('username', values.username, { path: '/' });
           }
-          navigate('/dashboards');
+          if (data.isAdmin) {
+            navigate('/admin');
+          } else {
+            navigate('/dashboards');
+          }
         } else {
           setOpen(true);
         }

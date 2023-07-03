@@ -85,6 +85,8 @@ function HeaderUserbox() {
     navigate('/login');
   };
 
+  let username = Cookies.get('username');
+
   return (
     <>
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
@@ -92,9 +94,7 @@ function HeaderUserbox() {
         <Hidden mdDown>
           <UserBoxText>
             <UserBoxLabel variant="body1">Sign Out</UserBoxLabel>
-            {/* <UserBoxDescription variant="body2">
-              {user.jobtitle}
-            </UserBoxDescription> */}
+            <UserBoxDescription variant="body2">{username}</UserBoxDescription>
           </UserBoxText>
         </Hidden>
         <Hidden smDown>

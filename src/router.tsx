@@ -9,6 +9,7 @@ import SuspenseLoader from 'src/components/SuspenseLoader';
 import SignIn from './signin/signin';
 import SignUp from './signup/signup';
 import UploadPage from './upload/uploadpage';
+import SidebarLayoutAdmin from './layouts/SidebarLayout/indexadmin';
 
 const Loader = (Component) => (props) =>
   (
@@ -151,6 +152,24 @@ const routes: RouteObject[] = [
       {
         path: 'messenger',
         element: <Messenger />
+      }
+    ]
+  },
+  {
+    path: 'admin',
+    element: <SidebarLayoutAdmin />,
+    children: [
+      {
+        path: 'active',
+        element: <Transactions />
+      },
+      {
+        path: 'wait',
+        element: <Transactions />
+      },
+      {
+        path: 'approve',
+        element: <Transactions />
       }
     ]
   },

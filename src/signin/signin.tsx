@@ -68,8 +68,14 @@ export default function SignIn() {
           let token = Cookies.get('token');
           if (token) {
             cookie.save('token', token, { path: '/' });
+            cookie.save('isAdmin', data.isAdmin, { path: '/' });
+            cookie.save('username', values.username, { path: '/' });
           }
-          navigate('/dashboards');
+          if (data.isAdmin) {
+            navigate('/admin');
+          } else {
+            navigate('/dashboards');
+          }
         } else {
           setOpen(true);
         }
@@ -83,10 +89,18 @@ export default function SignIn() {
       });
   };
 
-  let token = Cookies.get('token');
-  if (token) {
-    return <Navigate to="/dashboards" />;
-  }
+  React.useEffect(() => {
+    let token = Cookies.get('token');
+    if (token) {
+      let isAdmin = Cookies.get('isAdmin');
+      console.log(`isAdmin ${isAdmin}`);
+      if (isAdmin) {
+        navigate('/admin');
+      } else {
+        navigate('/dashboards');
+      }
+    }
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
