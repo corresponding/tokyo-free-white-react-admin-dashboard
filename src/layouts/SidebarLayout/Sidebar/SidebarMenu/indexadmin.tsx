@@ -211,21 +211,7 @@ function SidebarMenuAdmin() {
               </ListItem>
             </List>
           </SubMenuWrapper>
-          <SubMenuWrapper>
-            <List component="div">
-              <ListItem component="div">
-                <Button
-                  disableRipple
-                  component={RouterLink}
-                  onClick={closeSidebar}
-                  to="/admin/wait"
-                  startIcon={<TableChartTwoToneIcon />}
-                >
-                  Wait for approval
-                </Button>
-              </ListItem>
-            </List>
-          </SubMenuWrapper>
+
           <SubMenuWrapper>
             <List component="div">
               <ListItem component="div">
@@ -237,6 +223,22 @@ function SidebarMenuAdmin() {
                   startIcon={<RedeemTwoToneIcon />}
                 >
                   Reject Users
+                </Button>
+              </ListItem>
+            </List>
+          </SubMenuWrapper>
+
+          <SubMenuWrapper>
+            <List component="div">
+              <ListItem component="div">
+                <Button
+                  disableRipple
+                  component={RouterLink}
+                  onClick={closeSidebar}
+                  to="/admin/wait"
+                  startIcon={<TableChartTwoToneIcon />}
+                >
+                  Wait For Approval
                 </Button>
               </ListItem>
             </List>

@@ -34,6 +34,16 @@ const Messenger = Loader(
 const Transactions = Loader(
   lazy(() => import('src/content/applications/Transactions'))
 );
+const TransactionsActive = Loader(
+  lazy(() => import('src/content/applications/TransactionsActive'))
+);
+const TransactionsReject = Loader(
+  lazy(() => import('src/content/applications/TransactionsReject'))
+);
+const TransactionsWait = Loader(
+  lazy(() => import('src/content/applications/TransactionsWait'))
+);
+
 const UserProfile = Loader(
   lazy(() => import('src/content/applications/Users/profile'))
 );
@@ -160,16 +170,20 @@ const routes: RouteObject[] = [
     element: <SidebarLayoutAdmin />,
     children: [
       {
+        path: '',
+        element: <Navigate to="active" replace />
+      },
+      {
         path: 'active',
-        element: <Transactions />
+        element: <TransactionsActive />
       },
       {
         path: 'wait',
-        element: <Transactions />
+        element: <TransactionsWait />
       },
       {
         path: 'approve',
-        element: <Transactions />
+        element: <TransactionsReject />
       }
     ]
   },
