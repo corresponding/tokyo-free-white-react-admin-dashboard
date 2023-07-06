@@ -72,7 +72,7 @@ export default function SignIn() {
             cookie.save('isAdmin', data.isAdmin, { path: '/' });
             cookie.save('username', values.username, { path: '/' });
           }
-          if (data.isAdmin) {
+          if (data.isAdmin == true) {
             navigate('/admin');
           } else {
             navigate('/dashboards');
@@ -96,7 +96,7 @@ export default function SignIn() {
     if (token) {
       let isAdmin = Cookies.get('isAdmin');
       console.log(`isAdmin ${isAdmin}`);
-      if (isAdmin) {
+      if (isAdmin == true) {
         navigate('/admin');
       } else {
         navigate('/dashboards');

@@ -13,6 +13,8 @@ import WatchList from './WatchList';
 import AccountBalance4 from './AccountBalance4';
 import AccountBalance5 from './AccountBalance5';
 import AccountBalance6 from './AccountBalance6';
+import RecentActivityHeader1 from './RecentActivityHeader1';
+import RecentActivityHeader2 from './RecentActivityHeader2';
 
 function DashboardCrypto() {
   return (
@@ -31,6 +33,12 @@ function DashboardCrypto() {
           alignItems="stretch"
           spacing={4}
         >
+          <Grid item xs={12} md={6}>
+            <RecentActivityHeader1 />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <RecentActivityHeader2 />
+          </Grid>
           <Grid item xs={12}>
             <AccountBalance />
           </Grid>
