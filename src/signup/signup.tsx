@@ -40,6 +40,7 @@ const defaultTheme = createTheme();
 
 export default function SignUp() {
   const [open, setOpen] = React.useState(false);
+  const [msg, setMsg] = React.useState('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -66,21 +67,8 @@ export default function SignUp() {
         // console.log(response);
         let { data } = response.data;
         console.log(data);
-        if (data.isLogin) {
-          let token = Cookies.get('token');
-          if (token) {
-            cookie.save('token', token, { path: '/' });
-            cookie.save('isAdmin', data.isAdmin, { path: '/' });
-            cookie.save('username', values.username, { path: '/' });
-          }
-          if (data.isAdmin) {
-            navigate('/admin');
-          } else {
-            navigate('/dashboards');
-          }
-        } else {
-          setOpen(true);
-        }
+        setMsg(data.msg);
+        setOpen(true);
       })
       .catch(function (error) {
         // handle error
@@ -225,9 +213,7 @@ export default function SignUp() {
           aria-labelledby="simple-dialog-title"
           open={open}
         >
-          <DialogTitle id="simple-dialog-title">
-            Account already exists!
-          </DialogTitle>
+          <DialogTitle id="simple-dialog-title">{msg}</DialogTitle>
         </Dialog>
       </Container>
     </ThemeProvider>
