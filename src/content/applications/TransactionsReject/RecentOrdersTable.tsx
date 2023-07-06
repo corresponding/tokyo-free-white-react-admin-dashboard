@@ -32,10 +32,16 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
 import { IpFormat } from 'src/models/ip_format';
 import { UserFormat } from 'src/models/user_format';
+import axios from 'axios';
+import cookie from 'react-cookies';
+
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import CachedIcon from '@mui/icons-material/Cached';
 
 interface RecentOrdersTableProps {
   className?: string;
   cryptoOrders: UserFormat[];
+  update: () => void;
 }
 interface Filters {
   status?: CryptoOrderStatus;
@@ -85,7 +91,10 @@ const applyPagination = (
   return cryptoOrders.slice(page * limit, page * limit + limit);
 };
 
-const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
+const RecentOrdersTable: FC<RecentOrdersTableProps> = ({
+  cryptoOrders,
+  update
+}) => {
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<number[]>(
     []
   );
@@ -174,6 +183,38 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     selectedCryptoOrders.length === cryptoOrders.length;
   const theme = useTheme();
 
+  const handleAgree = (userid: number, status: number) => {
+    // console.log(`${userid} ${status}`);
+    let body = { userid: userid, status: status };
+    let jsonbody = JSON.stringify(body);
+    console.log(`${jsonbody}`);
+    axios
+      .create({
+        headers: {
+          token: cookie.load('token'),
+          'Cache-Control': 'no-cache',
+          'Content-type': 'application/json; charset=UTF-8'
+        }
+      })
+      .post('/api/updateuserstatus', jsonbody)
+      .then((response) => {
+        // handle success
+        // console.log(response);
+        let { data } = response.data;
+        console.log(data);
+        if (data.success) {
+          update();
+        }
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  };
+
   return (
     <Card>
       {selectedBulkActions && (
@@ -199,8 +240,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
               <TableCell>address</TableCell>
               <TableCell>email</TableCell>
               <TableCell>phone</TableCell>
-              <TableCell align="right">have delete</TableCell>
-              <TableCell align="right">have udpate</TableCell>
+              <TableCell align="right">operate</TableCell>
               {/* <TableCell align="right">Actions</TableCell> */}
             </TableRow>
           </TableHead>
@@ -279,25 +319,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                     </Typography> */}
                   </TableCell>
                   <TableCell align="right">
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {cryptoOrder.dodelete}
-                      {/* {cryptoOrder.cryptoCurrency} */}
-                    </Typography>
-                    {/* <Typography variant="body2" color="text.secondary" noWrap>
-                      {numeral(cryptoOrder.amount).format(
-                        `${cryptoOrder.currency}0,0.00`
-                      )}
-                    </Typography> */}
-                  </TableCell>
-                  <TableCell align="right">{cryptoOrder.doupdate}</TableCell>
-                  {/* <TableCell align="right">
-                    <Tooltip title="Delete Order" arrow>
+                    <Tooltip title="Wait to approve" arrow>
                       <IconButton
                         sx={{
                           '&:hover': { background: theme.colors.error.lighter },
@@ -305,11 +327,14 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                         }}
                         color="inherit"
                         size="small"
+                        onClick={() => {
+                          handleAgree(cryptoOrder.id, 0);
+                        }}
                       >
-                        <DeleteTwoToneIcon fontSize="small" />
+                        <CachedIcon fontSize="small" />
                       </IconButton>
                     </Tooltip>
-                  </TableCell> */}
+                  </TableCell>
                 </TableRow>
               );
             })}

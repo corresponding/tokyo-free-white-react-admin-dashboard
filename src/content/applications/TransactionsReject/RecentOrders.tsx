@@ -53,7 +53,7 @@ function RecentOrders() {
 
   return (
     <Card>
-      <RecentOrdersTable cryptoOrders={cryptoOrders} />
+      <RecentOrdersTable cryptoOrders={cryptoOrders} update={getdata} />
     </Card>
   );
 }
