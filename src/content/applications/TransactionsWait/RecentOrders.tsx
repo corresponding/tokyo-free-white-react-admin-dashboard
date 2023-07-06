@@ -40,7 +40,7 @@ function RecentOrders() {
         // console.log(response);
         let { data } = response.data;
         console.log(data);
-        setCryptoOrders(data.list1);
+        setCryptoOrders(data.list0);
       })
       .catch(function (error) {
         // handle error
@@ -53,7 +53,7 @@ function RecentOrders() {
 
   return (
     <Card>
-      <RecentOrdersTable cryptoOrders={cryptoOrders} />
+      <RecentOrdersTable cryptoOrders={cryptoOrders} update={getdata} />
     </Card>
   );
 }
