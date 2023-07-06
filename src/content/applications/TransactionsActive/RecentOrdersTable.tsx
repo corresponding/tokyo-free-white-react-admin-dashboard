@@ -199,8 +199,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
               <TableCell>address</TableCell>
               <TableCell>email</TableCell>
               <TableCell>phone</TableCell>
-              <TableCell align="right">have deleted</TableCell>
-              <TableCell align="right">have udpated</TableCell>
+              <TableCell align="right">data count</TableCell>
               {/* <TableCell align="right">Actions</TableCell> */}
             </TableRow>
           </TableHead>
@@ -278,26 +277,8 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                       {cryptoOrder.sourceDesc}
                     </Typography> */}
                   </TableCell>
-                  <TableCell align="right">
-                    <Typography
-                      variant="body1"
-                      fontWeight="bold"
-                      color="text.primary"
-                      gutterBottom
-                      noWrap
-                    >
-                      {cryptoOrder.dodelete ? '√' : '×'}
-                      {/* {cryptoOrder.cryptoCurrency} */}
-                    </Typography>
-                    {/* <Typography variant="body2" color="text.secondary" noWrap>
-                      {numeral(cryptoOrder.amount).format(
-                        `${cryptoOrder.currency}0,0.00`
-                      )}
-                    </Typography> */}
-                  </TableCell>
-                  <TableCell align="right">
-                    {cryptoOrder.doupdate ? '√' : '×'}
-                  </TableCell>
+
+                  <TableCell align="right">{cryptoOrder.doupdate}</TableCell>
                   {/* <TableCell align="right">
                     <Tooltip title="Delete Order" arrow>
                       <IconButton
