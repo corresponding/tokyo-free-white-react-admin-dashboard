@@ -102,7 +102,7 @@ function RecentActivityHeader2() {
                 variant="caption"
                 sx={{ fontSize: `${theme.typography.pxToRem(16)}` }}
               >
-                Distinct values
+                Distinct
               </Typography>
               <Typography variant="h2">{summary.time_distinct}</Typography>
             </Box>
@@ -134,7 +134,7 @@ function RecentActivityHeader2() {
                 variant="caption"
                 sx={{ fontSize: `${theme.typography.pxToRem(16)}` }}
               >
-                Distinct values
+                Distinct
               </Typography>
               <Typography variant="h2">{summary.length_num}</Typography>
             </Box>
@@ -166,7 +166,7 @@ function RecentActivityHeader2() {
                 variant="caption"
                 sx={{ fontSize: `${theme.typography.pxToRem(16)}` }}
               >
-                Distinct values
+                Distinct
               </Typography>
               <Typography variant="h2">
                 {summary.destination_distinct}
