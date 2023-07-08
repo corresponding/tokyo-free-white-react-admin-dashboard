@@ -32,10 +32,14 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import BulkActions from './BulkActions';
 import { IpFormat } from 'src/models/ip_format';
 import { UserFormat } from 'src/models/user_format';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import axios from 'axios';
+import cookie from 'react-cookies';
 
 interface RecentOrdersTableProps {
   className?: string;
   cryptoOrders: UserFormat[];
+  update: () => void;
 }
 interface Filters {
   status?: CryptoOrderStatus;
@@ -85,7 +89,10 @@ const applyPagination = (
   return cryptoOrders.slice(page * limit, page * limit + limit);
 };
 
-const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
+const RecentOrdersTable: FC<RecentOrdersTableProps> = ({
+  cryptoOrders,
+  update
+}) => {
   const [selectedCryptoOrders, setSelectedCryptoOrders] = useState<number[]>(
     []
   );
@@ -174,6 +181,38 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
     selectedCryptoOrders.length === cryptoOrders.length;
   const theme = useTheme();
 
+  const handleAgree = (userid: number) => {
+    // console.log(`${userid} ${status}`);
+    let body = { userid: userid, status: status };
+    let jsonbody = JSON.stringify(body);
+    console.log(`${jsonbody}`);
+    axios
+      .create({
+        headers: {
+          token: cookie.load('token'),
+          'Cache-Control': 'no-cache',
+          'Content-type': 'application/json; charset=UTF-8'
+        }
+      })
+      .post('/api/deleteuser', jsonbody)
+      .then((response) => {
+        // handle success
+        // console.log(response);
+        let { data } = response.data;
+        console.log(data);
+        if (data.success) {
+          update();
+        }
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  };
+
   return (
     <Card>
       {selectedBulkActions && (
@@ -200,6 +239,7 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
               <TableCell>email</TableCell>
               <TableCell>phone</TableCell>
               <TableCell align="right">data count</TableCell>
+              <TableCell align="right">operate</TableCell>
               {/* <TableCell align="right">Actions</TableCell> */}
             </TableRow>
           </TableHead>
@@ -279,8 +319,8 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                   </TableCell>
 
                   <TableCell align="right">{cryptoOrder.doupdate}</TableCell>
-                  {/* <TableCell align="right">
-                    <Tooltip title="Delete Order" arrow>
+                  <TableCell align="right">
+                    <Tooltip title="Delete" arrow>
                       <IconButton
                         sx={{
                           '&:hover': { background: theme.colors.error.lighter },
@@ -288,11 +328,14 @@ const RecentOrdersTable: FC<RecentOrdersTableProps> = ({ cryptoOrders }) => {
                         }}
                         color="inherit"
                         size="small"
+                        onClick={() => {
+                          handleAgree(cryptoOrder.id);
+                        }}
                       >
-                        <DeleteTwoToneIcon fontSize="small" />
+                        <ClearOutlinedIcon fontSize="small" />
                       </IconButton>
                     </Tooltip>
-                  </TableCell> */}
+                  </TableCell>
                 </TableRow>
               );
             })}
