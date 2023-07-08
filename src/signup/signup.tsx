@@ -14,8 +14,6 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import cookie from 'react-cookies';
-import Cookies from 'js-cookie';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 
@@ -52,9 +50,53 @@ export default function SignUp() {
       address: data.get('address'),
       password: data.get('password')
     };
+    if (!checkUsername(values.username)) {
+      return;
+    }
+    if (!checkPhonenum(values.phone)) {
+      return;
+    }
+    if (!checkPassword(values.password)) {
+      return;
+    }
     onSignUp(values);
   };
-  const navigate = useNavigate();
+
+  // 校验用户名
+  const checkUsername = (username) => {
+    // 2.定义正则表达式
+    var reg_username = /^\w{6,12}$/;
+    // 3.判断值是否符合表达式的规则
+    var flag = reg_username.test(username);
+    if (flag == false) {
+      setMsg('Error username format. Please input 6-12 words');
+      setOpen(true);
+    }
+    return flag;
+  };
+
+  // 校验密码
+  function checkPassword(password) {
+    var reg_password = /^[a-zA-Z]\w{5,17}$/;
+    var flag = reg_password.test(password);
+    if (flag == false) {
+      setMsg('Error password format. Please input 6-18 words');
+      setOpen(true);
+    }
+    return flag;
+  }
+
+  // 校验电话号码
+  function checkPhonenum(phonenum) {
+    var reg_phone =
+      /^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+    var flag = reg_phone.test(phonenum);
+    if (flag == false) {
+      setMsg('error phonenum');
+      setOpen(true);
+    }
+    return flag;
+  }
 
   const onSignUp = (values: any) => {
     console.log('signup onFinishLogin Received values of form: ', values);

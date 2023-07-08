@@ -180,11 +180,6 @@ function SidebarMenuAdmin() {
   const { closeSidebar } = useContext(SidebarContext);
   const navigate = useNavigate();
 
-  const handleClickLogout = (e: any) => {
-    Cookies.remove('token');
-    navigate('/login');
-  };
-
   return (
     <>
       <MenuWrapper>

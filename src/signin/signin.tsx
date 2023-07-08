@@ -13,8 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-import cookie from 'react-cookies';
-import Cookies from 'js-cookie';
+import localStorage from 'localStorage';
 import { useNavigate, Navigate } from 'react-router-dom';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -64,14 +63,11 @@ export default function SignIn() {
         // handle success
         // console.log(response);
         let { data } = response.data;
-        console.log(data);
-        if (data.isLogin) {
-          let token = Cookies.get('token');
-          if (token) {
-            cookie.save('token', token, { path: '/' });
-            cookie.save('isAdmin', data.isAdmin, { path: '/' });
-            cookie.save('username', values.username, { path: '/' });
-          }
+        console.log(`login data:${data}`);
+        if (data.isLogin == true) {
+          localStorage.setItem('isLogin', true);
+          localStorage.setItem('isAdmin', data.isAdmin);
+          localStorage.setItem('username', data.username);
           if (data.isAdmin == true) {
             navigate('/admin');
           } else {
@@ -92,9 +88,10 @@ export default function SignIn() {
   };
 
   React.useEffect(() => {
-    let token = Cookies.get('token');
-    if (token) {
-      let isAdmin = Cookies.get('isAdmin');
+    let isLogin = localStorage.getItem('isLogin');
+    console.log(`isLogin ${isLogin}`);
+    if (isLogin == true) {
+      let isAdmin = localStorage.getItem('isAdmin');
       console.log(`isAdmin ${isAdmin}`);
       if (isAdmin == true) {
         navigate('/admin');

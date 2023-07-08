@@ -23,6 +23,7 @@ import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
 import LockOpenTwoToneIcon from '@mui/icons-material/LockOpenTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import Cookies from 'js-cookie';
+import cookie from 'react-cookies';
 import { useNavigate } from 'react-router-dom';
 
 const UserBoxButton = styled(Button)(
@@ -81,7 +82,9 @@ function HeaderUserbox() {
   };
 
   const handleClickLogout = (e: any) => {
-    Cookies.remove('token');
+    localStorage.removeItem('isLogin');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('username');
     navigate('/login');
   };
 
