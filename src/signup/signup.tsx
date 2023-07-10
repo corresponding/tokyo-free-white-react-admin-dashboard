@@ -88,8 +88,7 @@ export default function SignUp() {
 
   // 校验电话号码
   function checkPhonenum(phonenum) {
-    var reg_phone =
-      /^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+    var reg_phone = /^[0-9]{11}$/;
     var flag = reg_phone.test(phonenum);
     if (flag == false) {
       setMsg('error phonenum');
